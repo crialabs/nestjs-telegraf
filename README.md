@@ -24,11 +24,34 @@ This package uses the best of the NodeJS world under the hood. [Telegraf](https:
 **Chat**
 
 * [Telegram](https://t.me/nestjs_telegraf)
+
+## Overview
+
+NestJS Telegraf is a powerful solution for creating Telegram bots using the NestJS framework. It provides a fast and easy way to create Telegram bots and deeply integrate them with your NestJS application.
+
 ## Installation
 
 ```bash
 $ npm i nestjs-telegraf telegraf
 ```
+
+Once the installation process is complete, we can import the `TelegrafModule` into the root `AppModule`.
+
+```typescript title="src/app.module.ts"
+import { Module } from '@nestjs/common';
+import { TelegrafModule } from 'nestjs-telegraf';
+
+@Module({
+  imports: [
+    TelegrafModule.forRoot({
+      token: 'TELEGRAM_BOT_TOKEN',
+    })
+  ],
+})
+export class AppModule {}
+```
+
+The `forRoot()` method accepts the same configuration object as Telegraf class constructor from the Telegraf package, as described [here](https://telegraf.js.org/#/?id=constructor).
 
 ## Documentation
 Check out the [documentation site](https://nestjs-telegraf.0x467.com/).

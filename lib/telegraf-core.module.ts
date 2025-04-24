@@ -37,6 +37,12 @@ export class TelegrafCoreModule implements OnApplicationShutdown {
     private readonly moduleRef: ModuleRef,
   ) {}
 
+  /**
+   * Creates a TelegrafCoreModule with the given options.
+   * 
+   * @param {TelegrafModuleOptions} options - The options for the Telegraf module.
+   * @returns {DynamicModule} A dynamic module with the provided options.
+   */
   public static forRoot(options: TelegrafModuleOptions): DynamicModule {
     const telegrafBotName = getBotToken(options.botName);
 
@@ -75,6 +81,12 @@ export class TelegrafCoreModule implements OnApplicationShutdown {
     };
   }
 
+  /**
+   * Creates a TelegrafCoreModule with the given asynchronous options.
+   * 
+   * @param {TelegrafModuleAsyncOptions} options - The asynchronous options for the Telegraf module.
+   * @returns {DynamicModule} A dynamic module with the provided asynchronous options.
+   */
   public static forRootAsync(
     options: TelegrafModuleAsyncOptions,
   ): DynamicModule {
@@ -115,11 +127,22 @@ export class TelegrafCoreModule implements OnApplicationShutdown {
     };
   }
 
+  /**
+   * Handles the application shutdown event.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the bot is stopped.
+   */
   async onApplicationShutdown(): Promise<void> {
     const bot = this.moduleRef.get<any>(this.botName);
     bot && (await bot.stop());
   }
 
+  /**
+   * Creates asynchronous providers for the Telegraf module.
+   * 
+   * @param {TelegrafModuleAsyncOptions} options - The asynchronous options for the Telegraf module.
+   * @returns {Provider[]} An array of providers for the Telegraf module.
+   */
   private static createAsyncProviders(
     options: TelegrafModuleAsyncOptions,
   ): Provider[] {
@@ -136,6 +159,12 @@ export class TelegrafCoreModule implements OnApplicationShutdown {
     ];
   }
 
+  /**
+   * Creates an asynchronous options provider for the Telegraf module.
+   * 
+   * @param {TelegrafModuleAsyncOptions} options - The asynchronous options for the Telegraf module.
+   * @returns {Provider} A provider for the Telegraf module options.
+   */
   private static createAsyncOptionsProvider(
     options: TelegrafModuleAsyncOptions,
   ): Provider {

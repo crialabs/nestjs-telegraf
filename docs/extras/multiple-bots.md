@@ -66,3 +66,73 @@ TelegrafModule.forRootAsync({
   inject: [ConfigService],
 }),
 ```
+
+## More Ideas for Using Multiple Bots
+
+### Different Middlewares
+
+You can configure each bot with different middlewares. For example, you can add a session middleware to one bot and a different middleware to another bot.
+
+```typescript
+TelegrafModule.forRoot({
+  botName: 'cat',
+  token: 'CAT_BOT_TOKEN',
+  middlewares: [session()],
+}),
+TelegrafModule.forRoot({
+  botName: 'dog',
+  token: 'DOG_BOT_TOKEN',
+  middlewares: [anotherMiddleware()],
+}),
+```
+
+### Different Launch Options
+
+You can also configure each bot with different launch options. For example, you can set different polling options for each bot.
+
+```typescript
+TelegrafModule.forRoot({
+  botName: 'cat',
+  token: 'CAT_BOT_TOKEN',
+  launchOptions: { polling: { interval: 1000 } },
+}),
+TelegrafModule.forRoot({
+  botName: 'dog',
+  token: 'DOG_BOT_TOKEN',
+  launchOptions: { polling: { interval: 2000 } },
+}),
+```
+
+### Specific Handlers
+
+You can configure each bot with specific handlers. For example, you can add different command handlers to each bot.
+
+```typescript
+TelegrafModule.forRoot({
+  botName: 'cat',
+  token: 'CAT_BOT_TOKEN',
+  include: [CatCommandsModule],
+}),
+TelegrafModule.forRoot({
+  botName: 'dog',
+  token: 'DOG_BOT_TOKEN',
+  include: [DogCommandsModule],
+}),
+```
+
+### Using the `include` Property
+
+The `include` property allows you to specify which modules should handle updates for each bot. This is useful when you want to limit the scope of handlers for each bot.
+
+```typescript
+TelegrafModule.forRoot({
+  botName: 'cat',
+  token: 'CAT_BOT_TOKEN',
+  include: [CatsModule],
+}),
+TelegrafModule.forRoot({
+  botName: 'dog',
+  token: 'DOG_BOT_TOKEN',
+  include: [DogsModule],
+}),
+```
